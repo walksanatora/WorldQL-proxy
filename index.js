@@ -10,7 +10,7 @@ const app = express()
 app.use(express.json())
 
 const port = process.env.PORT || 2030
-const WQLWebsocket = process.env['WQL_WEBSOCKET'] || 'ws://10.0.0.148:8080'
+const WQLWebsocket = process.env['WQL_WEBSOCKET'] || 'ws://localhost:8080'
 
 const Clients = {}
 const UnreadMessages = {}
