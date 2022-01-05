@@ -2,7 +2,6 @@ import express from "express"
 import * as wql from '@worldql/client'
 import * as crypto from 'node:crypto'
 import logger from './Logger.js'
-import config from './config.json'
 
 logger.startREPL()
 
