@@ -15,10 +15,8 @@
   "dependencies": {
     "@worldql/client": "^0.1.0",
     "colors": "^1.4.0",
-    "crypto": "^1.0.1",
     "express": "^4.17.2",
     "flatbuffers": "^2.0.4",
-    "JSON": "^1.0.0",
     "neo-blessed": "^0.2.0",
     "prompt-sync": "^4.1.6",
     "ws": "^8.4.0"
