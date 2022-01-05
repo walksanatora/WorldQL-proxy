@@ -20,7 +20,7 @@
     "flatbuffers": "^2.0.4",
     "JSON": "^1.0.0",
     "neo-blessed": "^0.2.0",
-    "prompt-sync": "^4.2.0",
+    "prompt-sync": "^4.1.6",
     "ws": "^8.4.0"
   }
 }
