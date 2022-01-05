@@ -1,0 +1,4 @@
+{
+    "WorldQL_Websocket_URL": "ws://localhost:8080",
+    "App_Port": 2030
+}
