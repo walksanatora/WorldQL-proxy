@@ -1,24 +1,21 @@
 {
-  "name": "worldql-proxy",
-  "type": "module",
+  "name": "proxy",
   "version": "1.0.0",
-  "description": "a proxy between WorldQL flatbuffers and Roblox JSON",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "WorldQL",
-    "Roblox"
-  ],
-  "author": "walksanator",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "@worldql/client": "^0.1.0",
     "colors": "^1.4.0",
+    "eventemitter3": "^4.0.7",
     "express": "^4.17.2",
     "flatbuffers": "^2.0.4",
+    "isomorphic-ws": "^4.0.1",
     "neo-blessed": "^0.2.0",
-    "prompt-sync": "^4.1.6",
-    "ws": "^8.4.0"
+    "websocket": "^1.0.34"
   }
 }

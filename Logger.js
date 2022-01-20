@@ -1,7 +1,7 @@
-import WLog from './WALLogger.js'
-import 'colors'
+let WLog = require('./WALLogger.js')
+let colors = require('colors')
 
-import util from 'node:util'
+let util = require('node:util')
 
 const incomingToProxy = new WLog.LogFormatter({
     'formatShort': (...v)=>{
@@ -47,7 +47,7 @@ const connectionJoin = new WLog.LogFormatter({
         return util.format('+'.green.inverse + ' (%d)'.brightBlue + ' A User UUID ' + '%s'.green + ' Has Connected',...v)
     },
     'inspect': (ths) =>{
-        return util.format('Client Connect\nUUID: ' + '%s'.green + '\nKey: ' + '%s'.green,ths.values[2],ths.values[1])
+        return util.format('Client Connect\nUUID: ' + '%s'.green + '\nKey: ' + '%s'.green,ths.extra[0],ths.extra[1])
     }
 })
 
@@ -59,7 +59,7 @@ const connectionLeave = new WLog.LogFormatter({
         return util.format('-'.red.inverse + ' (%d)'.brightBlue + ' User UUID: ' + '%s'.green + ' Has Disconnected',...v)
     },
     'inspect': (ths) =>{
-        return util.format('Client Disconnect\nUUID: ' + '%s'.green + '\nKey: ' + '%s'.green,ths.values[2],ths.values[1])
+        return util.format('Client Disconnect\nUUID: ' + '%s'.green + '\nKey: ' + '%s'.green,ths.extra[0],ths.extra[1])
     }
 })
 
@@ -71,7 +71,7 @@ const connectionLeaveTimeout = new WLog.LogFormatter({
         return util.format('-'.red.inverse + ' (%d)'.brightBlue + ' User UUID: ' + '%s'.green + ' Has Disconnected (timeout)',...v)
     },
     'inspect': (ths) =>{
-        return util.format('Client Disconnect (Timeout)\nUUID: ' + '%s'.green + '\nKey: ' + '%s'.green,ths.values[2],ths[1])
+        return util.format('Client Disconnect (Timeout)\nUUID: ' + '%s'.green + '\nKey: ' + '%s'.green,ths.extra[0],ths.extra[1])
     }
 })
 
@@ -100,7 +100,7 @@ const genericMessage = new WLog.LogFormatter({
 })
 
 const logger = new WLog.Logger({
-    //'File':'tmp.log.json',
+    'File':'tmp.log.json',
     'DefaultMessages': {
         'incomingToProxy': incomingToProxy,
         'incomingToClient': incomingToClient,
@@ -126,4 +126,4 @@ logger._print('\n***Seperation***\n'.bold)
 for (let index = 0; index < logger._Messages.length; index++) {logger._print(logger.inspectMessage(index) + '\n')}
 }
 
-export default logger
+module.exports = logger

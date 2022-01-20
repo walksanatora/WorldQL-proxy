@@ -1,7 +1,7 @@
-import fs from 'node:fs'
-import util from 'node:util'
-import bless from 'neo-blessed'
-import 'colors'
+let fs = require('node:fs')
+let util = require('node:util')
+let bless = require('neo-blessed')
+let colors = require('colors')
 
 class LogFormatter{
 	values = []
@@ -53,13 +53,13 @@ class Logger{
 	}
 	_print(text){
 		if (this.replEnabled){
-			let lines = text.split('\n')
+			let lines = `${text}`.split('\n')
 			for (let i = 0; i < lines.length; i++) {
 				this._term.addItem(lines[i])
 			}
 			this._scr.render()
 		}else{
-			console.log(log)
+			console.log(text)
 		}
 	}
 	get messageTypes() {return Object.keys(this._Formatters)}
@@ -224,4 +224,4 @@ const def = {
 	LogFormatter: LogFormatter,
 	Logger: Logger
 }
-export default def
+module.exports = def
