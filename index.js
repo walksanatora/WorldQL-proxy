@@ -10,10 +10,10 @@ app.use(express.json())
 const port = process.env.PORT || 2030
 const WebsocketAddr = process.env['WQL_WEBSOCKET'] || 'ws://localhost:8080'
 
-//region variables
+// #region variables
 const Clients = {} //key: websocket
 const LastSeen = {} // key: number (unix time of last ping)
-//endregion
+// #endregion
 
 function updateLastSeen(key){
 	LastSeen[key] = Date.now()
@@ -47,7 +47,7 @@ app.post('/auth',(req,res)=>{
 	client.connect()
 })
 
-app.delete('/WorldQL/Auth',(req,res)=>{
+app.delete('/auth',(req,res)=>{
     if (Object.keys(Clients).indexOf(req.headers.key) != -1){
         var WQLC = Clients[req.headers.key]
         logger.logMessage('connectionLeave',[WQLC.uuid],[WQLC.uuid,req.headers.key])
@@ -140,6 +140,27 @@ app.get('/message',(req,res)=>{
         console.log(`${req.ip} tried to use server key "${req.headers.key}" and failed`)
         console.log(`current Keys are:`)
         console.log(Object.keys(Clients))
+        res.send({
+            'failed':true,
+            'message': 'invalid server key'
+        })
+    }
+})
+
+app.get('/ping',(req,res)=>{
+    if (Object.keys(Clients).indexOf(req.headers.key) != -1){
+        updateLastSeen(req.headers.key)
+        var Wqlc = Clients[req.headers.key]
+        var uuid = Wqlc.uuid
+        res.send({
+            'failed':false,
+            'message': 'updated last seen time',
+            'output': {
+                'messages': Wqlc.messageCount
+            }
+        })
+    }else{
+        logger.logMessage('invalidKey',[req.header.key,req.ip],Object.keys(Clients))
         res.send({
             'failed':true,
             'message': 'invalid server key'
